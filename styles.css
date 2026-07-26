@@ -1,0 +1,28 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #222222;
+  --font-tech: "Roboto Mono", monospace;
+  --font-main: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-main);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-tech);
+}
