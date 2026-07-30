@@ -27,6 +27,17 @@ const displayMessage = (message) => {
   vehicleMessage.textContent = message;
 };
 
+const displayVehicle = (vehicle) => {
+  vehicleContent.replaceChildren();
+  const vehicleTitle = document.createElement("h2");
+  vehicleTitle.textContent = `${vehicle.ModelYear} ${vehicle.Make} ${vehicle.Model}`;
+  vehicleContent.append(vehicleTitle);
+
+  const vehicleSub = document.createElement("p");
+  vehicleSub.textContent = `Engine Size: ${vehicle.DisplacementL}`;
+  vehicleContent.append(vehicleSub);
+};
+
 const handleSearch = async () => {
   const vin = getVin();
 
@@ -38,6 +49,8 @@ const handleSearch = async () => {
   displayMessage(`Searching VIN: ${vin}`);
 
   const vehicle = await fetchVehicleData(vin);
+
+  displayVehicle(vehicle);
 
   console.log(vehicle);
 };
