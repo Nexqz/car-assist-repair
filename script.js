@@ -1,12 +1,45 @@
 const searchButton = document.querySelector("#search-btn");
 const vinInput = document.querySelector("#vin-search");
+const vehicleContent = document.querySelector(".vehicle-content");
 const vehicleMessage = document.querySelector(".vehicle-message");
 
-searchButton.addEventListener("click", () => {
-  const vin = vinInput.value.trim();
-  if (vin === "") {
-    vehicleMessage.textContent = "Please enter a VIN";
-  } else {
-    vehicleMessage.textContent = `Searching VIN: ${vin}`;
+const getVin = () => {
+  return vinInput.value.trim();
+};
+
+const isEmptyVin = (vin) => {
+  return vin === "";
+};
+
+const fetchVehicleData = async (vin) => {
+  const response = await fetch(
+    `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/${vin}?format=json`,
+  );
+
+  const data = await response.json();
+
+  const vehicle = data.Results[0];
+
+  return vehicle;
+};
+
+const displayMessage = (message) => {
+  vehicleMessage.textContent = message;
+};
+
+const handleSearch = async () => {
+  const vin = getVin();
+
+  if (isEmptyVin(vin)) {
+    displayMessage("Please enter a VIN");
+    return;
   }
-});
+
+  displayMessage(`Searching VIN: ${vin}`);
+
+  const vehicle = await fetchVehicleData(vin);
+
+  console.log(vehicle);
+};
+
+searchButton.addEventListener("click", handleSearch);
