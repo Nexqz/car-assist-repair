@@ -38,33 +38,37 @@ const displayVehicle = (vehicle) => {
   vehicleContent.append(vehicleSub);
 };
 
-const displayOilCard = (container) => {
+const createCard = (title) => {
   const card = document.createElement("div");
   const cardTitle = document.createElement("h2");
+  cardTitle.textContent = title;
+  card.append(cardTitle);
+  return card;
+};
+
+const displayOilCard = (container) => {
+  const card = createCard("Oil Maintenance");
   const oilFilter = document.createElement("p");
   const oilCapacity = document.createElement("p");
   const oilType = document.createElement("p");
 
-  cardTitle.textContent = "Oil Maintenance";
   oilFilter.textContent = `Oil Filter: ${0}`;
   oilCapacity.textContent = `Oil Capacity: ${0}`;
   oilType.textContent = `Oil Type: ${0}`;
 
-  card.append(cardTitle, oilFilter, oilCapacity, oilType);
+  card.append(oilFilter, oilCapacity, oilType);
   container.append(card);
 };
 
 const displayTireCard = (container) => {
-  const card = document.createElement("div");
-  const cardTitle = document.createElement("h2");
+  const card = createCard("Tire Maintenance");
   const tirePressureFront = document.createElement("p");
   const tirePressureRear = document.createElement("p");
 
-  cardTitle.textContent = "Tire Maintenance";
   tirePressureFront.textContent = `Tire Pressure Front: ${0} `;
   tirePressureRear.textContent = `Tire Pressure Rear: ${0} `;
 
-  card.append(cardTitle, tirePressureFront, tirePressureRear);
+  card.append(tirePressureFront, tirePressureRear);
   container.append(card);
 };
 
