@@ -20,10 +20,13 @@ const fetchVehicleData = async (vin) => {
     `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/${vin}?format=json`,
   );
 
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status}`);
+  }
+
   const data = await response.json();
 
   const vehicle = data.Results[0];
-  console.log(vehicle);
 
   return vehicle;
 };
@@ -124,8 +127,8 @@ const handleSearch = async () => {
     displayMaintenance();
     displayMessage("");
   } catch (error) {
-    console.log(error);
-    displayMessage("Something went wrong. Please try again.");
+    console.error(error);
+    displayMessage("Unable to retrieve vehicle information. Please try again.");
   }
 };
 
